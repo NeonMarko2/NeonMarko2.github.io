@@ -77,15 +77,40 @@
 
     var InnerText = document.getElementById("Text")
 
+    var ComingText = `Priest game is coming<br/>Current version<br/>0.45`
+    var CurrentText = "";
+    var CurrentLetter = 0;
+
     var dots = ""
 
-    ReWriteText();
+    InnerText.innerHTML = ""
+    
+    TypeWriter()
+
+    function TypeWriter(){
+        CurrentText += ComingText[CurrentLetter]
+        InnerText.innerHTML = CurrentText
+        CurrentLetter++;
+
+        if(ComingText[CurrentLetter] == ' '){
+            return TypeWriter()
+        }
+
+        if(ComingText[CurrentLetter] == '<'){
+            return TypeWriter()
+        }
+
+        if(CurrentLetter < ComingText.length){
+            setTimeout(TypeWriter, 35)
+        }
+
+        if(CurrentLetter >= ComingText.length){
+            setInterval(ReWriteText, 750);
+        }
+    }
 
     function ReWriteText(){
-        InnerText.innerHTML = 
-            "Priest game is coming" + dots + "<br/>"
-            + "Current version" + "<br/>"
-            + "0.45"
+        InnerText.innerHTML = `Priest game is coming${dots} <br/>Current version<br/>0.45`
         dots += "."
 
         if(dots.length > 3){
@@ -93,8 +118,6 @@
         }
         
     }
-
-    setInterval(ReWriteText, 750);
 
 </script>
 
